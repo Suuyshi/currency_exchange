@@ -79,8 +79,17 @@
   cursor: pointer;
 }
 
-.inner-container__btn-style > svg > path {
-  fill: $primary-color;
+.inner-container__btn-style:hover {
+  background-color: $light-gray-0;
+  transition: all cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.inner-container__btn-style {
+  svg {
+    path {
+      fill: $primary-color;
+    }
+  }
 }
 
 .inner-container__reset-btn-container {

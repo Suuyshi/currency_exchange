@@ -20,10 +20,10 @@ import { Select, InputNumber } from "antd";
 import CurrencyExIcon from "./assets/icons/CurrencyExIcon";
 import bg from "./BG.jpg";
 
-const CurrencyExchange = () => {
+const CurrencyExchange = ({ initialCurrencyList }) => {
   const [amountValue, setAmountValue] = useState(1.0);
   const [resultValue, setResultValue] = useState("");
-  const [currencyList, setCurrencyList] = useState([]);
+  const [currencyList, setCurrencyList] = useState(initialCurrencyList);
   const [selectedFromCurrency, setSelectedFromCurrency] = useState(null);
   const [selectedToCurrency, setSelectedToCurrency] = useState(null);
   const debounceTimer = useRef(null);
@@ -31,33 +31,6 @@ const CurrencyExchange = () => {
   const handleChangeAmount = (value) => {
     setAmountValue(value === "" || value === null ? 0.0 : value);
   };
-
-  const formatCurrencyList = useCallback((list) => {
-    return list.map((item) => ({ label: item, value: item }));
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const url = LIST_CURR_URL;
-      const options = {
-        method: "GET",
-        headers: {
-          "x-rapidapi-key": RAPID_API_KEY,
-          "x-rapidapi-host": RAPID_HOST,
-        },
-      };
-
-      try {
-        const response = await fetch(url, options);
-        const result = await response.json();
-        setCurrencyList(formatCurrencyList(result));
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchData();
-  }, [formatCurrencyList]);
 
   const getCurrencyOptions = useCallback((list, disabledValue) => {
     return list.map((item) => ({
