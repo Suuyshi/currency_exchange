@@ -7,7 +7,7 @@ import {
 import { ConfigProvider } from "antd";
 import "./assets/app.scss";
 
-async function fetchCurrencyData() {
+export async function fetchCurrencyData() {
   const url = LIST_CURR_URL;
   const options = {
     method: "GET",

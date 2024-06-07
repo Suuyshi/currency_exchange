@@ -136,6 +136,7 @@ const CurrencyExchange = ({ initialCurrencyList }) => {
                   options={getCurrencyOptions(currencyList, selectedToCurrency)}
                   value={selectedFromCurrency}
                   onChange={handleSelectFromCurrency}
+                  role="select-curr1"
                 />
               </div>
               <button
@@ -154,6 +155,7 @@ const CurrencyExchange = ({ initialCurrencyList }) => {
                   )}
                   value={selectedToCurrency}
                   onChange={handleSelectToCurrency}
+                  role="select-curr2"
                 />
               </div>
             </div>
