@@ -16,13 +16,14 @@ import {
 } from "./constants/currency-exchange-api";
 
 //Components
-import { Select, InputNumber } from "antd";
+import { Select, InputNumber, Spin } from "antd";
 import CurrencyExIcon from "./assets/icons/CurrencyExIcon";
 import bg from "./BG.jpg";
 
 const CurrencyExchange = ({ initialCurrencyList }) => {
   const [amountValue, setAmountValue] = useState(1.0);
   const [resultValue, setResultValue] = useState("");
+  const [resultLoading, setResultLoading] = useState(false);
   const [currencyList, setCurrencyList] = useState(initialCurrencyList);
   const [selectedFromCurrency, setSelectedFromCurrency] = useState(null);
   const [selectedToCurrency, setSelectedToCurrency] = useState(null);
@@ -55,6 +56,7 @@ const CurrencyExchange = ({ initialCurrencyList }) => {
   const fetchExchangeRate = useCallback(async () => {
     if (!selectedFromCurrency || !selectedToCurrency) return;
 
+    setResultLoading(true);
     const url = generateExchangeURL(
       selectedFromCurrency,
       selectedToCurrency,
@@ -78,6 +80,8 @@ const CurrencyExchange = ({ initialCurrencyList }) => {
       );
     } catch (error) {
       console.error(error);
+    } finally {
+      setResultLoading(false);
     }
   }, [selectedFromCurrency, selectedToCurrency, amountValue]);
 
@@ -171,9 +175,15 @@ const CurrencyExchange = ({ initialCurrencyList }) => {
                 </button>
               </div>
             )}
-            <div className="inner-container__result-container">
-              {resultValue}
-            </div>
+            {resultLoading ? (
+              <div className="inner-container__result-container">
+                <Spin />
+              </div>
+            ) : (
+              <div className="inner-container__result-container">
+                {resultValue}
+              </div>
+            )}
           </div>
         </div>
       </div>
