@@ -170,6 +170,7 @@ const CurrencyExchange = ({ initialCurrencyList }) => {
                 <button
                   className="inner-container__reset-btn-container--resetbtn"
                   onClick={handleReset}
+                  id="resetbtn"
                 >
                   Reset
                 </button>

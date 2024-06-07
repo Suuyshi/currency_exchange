@@ -1,4 +1,10 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import {
+  render,
+  screen,
+  fireEvent,
+  userEvent,
+  within,
+} from "@testing-library/react";
 import CurrencyExchange from "../CurrencyExchange";
 
 const mockInitialCurrencyList = [
@@ -7,13 +13,13 @@ const mockInitialCurrencyList = [
 ];
 
 describe("CurrencyExchange", () => {
-  //   it("should render CurrencyExchange component with initial currency list", () => {
-  //     render(<CurrencyExchange initialCurrencyList={mockInitialCurrencyList} />);
+  it("should render CurrencyExchange component with initial currency list", () => {
+    render(<CurrencyExchange initialCurrencyList={mockInitialCurrencyList} />);
 
-  //     expect(screen.getByText("Amount")).toBeInTheDocument();
-  //     expect(screen.getByText("From")).toBeInTheDocument();
-  //     expect(screen.getByText("To")).toBeInTheDocument();
-  //   });
+    expect(screen.getByText("Amount")).toBeInTheDocument();
+    expect(screen.getByText("From")).toBeInTheDocument();
+    expect(screen.getByText("To")).toBeInTheDocument();
+  });
 
   it("should handle amount input change", () => {
     render(<CurrencyExchange initialCurrencyList={mockInitialCurrencyList} />);
@@ -23,28 +29,4 @@ describe("CurrencyExchange", () => {
 
     expect(amountInput.value).toBe("5.0");
   });
-
-  //   it("should handle currency selection", () => {
-  //     render(<CurrencyExchange initialCurrencyList={mockInitialCurrencyList} />);
-
-  //     const fromCurrencySelect = screen.getAllByRole("select-curr1")[1];
-  //     fireEvent.change(fromCurrencySelect, { target: { value: "USD" } });
-
-  //     expect(fromCurrencySelect.value).toBe("USD");
-  //   });
-
-  //   it("should handle reset", () => {
-  //     render(<CurrencyExchange initialCurrencyList={mockInitialCurrencyList} />);
-
-  //     const fromCurrencySelect = screen.getAllByRole("select-curr1")[1];
-  //     fireEvent.change(fromCurrencySelect, {
-  //       target: { value: "USD", label: "USD" },
-  //     });
-  //     const toCurrencySelect = screen.getAllByRole("select-curr2")[1];
-  //     fireEvent.change(toCurrencySelect, {
-  //       target: { value: "EUR", label: "EUR" },
-  //     });
-  //     const resetButton = screen.getByText("Reset");
-  //     fireEvent.click(resetButton);
-  //   });
 });
