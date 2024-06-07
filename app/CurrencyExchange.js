@@ -72,7 +72,9 @@ const CurrencyExchange = ({ initialCurrencyList }) => {
       const response = await fetch(url, options);
       const result = await response.text();
       setResultValue(
-        `${amountValue} ${selectedFromCurrency} equals ${result} ${selectedToCurrency}`
+        `${amountValue} ${selectedFromCurrency} equals ${
+          (+result).toFixed(4) * amountValue
+        } ${selectedToCurrency}`
       );
     } catch (error) {
       console.error(error);
